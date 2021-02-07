@@ -6,7 +6,7 @@ import stormGlassNormalized3HoursFixture from '@test/fixtures/stormglass_normali
 jest.mock('axios');
 
 describe('StormGlass client', () => {
-    it('should return the normalized forecast fromt the StormGlass service', async() => {
+    it(' should return the normalized forecast fromt the StormGlass service', async() => {
         const lat = -33.792726;
         const lng = 151.289824;
 
