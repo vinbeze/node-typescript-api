@@ -41,7 +41,7 @@ jobs:
       run: ./scripts/deploy.sh
 
     - name: Deployment
-      run: git remote add umbler https://geonosis.deploy.umbler.com/jr18n77k/vinicius-surf-forecast-com.git && git push umbler master
+      run: git remote add umbler ssh://git@geonosis.deploy.umbler.com:9922/jr18n77k/vinicius-surf-forecast-com.git && git push umbler master
       env:
         CI: true
 
