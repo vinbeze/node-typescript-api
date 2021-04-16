@@ -26,7 +26,6 @@ describe('beach forecast functional tests', () => {
       user: user.id,
     };
     await new Beach(defaultBeach).save();
-    
     token = AuthService.generateToken(user.toJSON());
   });
 
