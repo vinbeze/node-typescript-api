@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { User } from '@src/models/user'
 import { BaseController } from './index';
 import AuthService from '@src/services/auth';
+import ApiError from '@src/util/errors/api-error';
 
 @Controller('users')
 export class UsersController extends BaseController{
@@ -22,16 +23,16 @@ export class UsersController extends BaseController{
         const {email, password} = req.body; 
         const user = await User.findOne({ email });
         if(!user){
-            return res.status(401).send({
+            return this.sendErrorResponse(res,ApiError.format({
                 code: 401,
-                error: 'User not found!',
-            }) ;
+                message: 'User not found!',
+            }));
         }
         if(!( await AuthService.comparePassword(password,user.password) )) {
-            return res.status(401).send({
+            return this.sendErrorResponse(res,ApiError.format({
                 code: 401,
-                error: 'Password does not match!',
-            }) ;
+                message: 'Password does not match!',
+            }));
         }
         const token = AuthService.generateToken(user.toJSON());
         return res.status(200).send( {token: token});
